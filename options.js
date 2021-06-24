@@ -1,8 +1,8 @@
 function save_options() {
-  var color = document.getElementById('color').value;
+  var className = document.getElementById('className').value;
   var likesColor = document.getElementById('like').checked;
-  chrome.storage.sync.set({
-    favoriteColor: color,
+  chrome.storage.local.set({
+    prefClassName: className,
     likesColor: likesColor
   }, function() {
     // Update status to let user know options were saved.
@@ -18,11 +18,11 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
-  chrome.storage.sync.get({
-    favoriteColor: 'red',
+  chrome.storage.local.get({
+    prefClassName: 'dgc',
     likesColor: true
   }, function(items) {
-    document.getElementById('color').value = items.favoriteColor;
+    document.getElementById('className').value = items.prefClassName;
     document.getElementById('like').checked = items.likesColor;
   });
 }
