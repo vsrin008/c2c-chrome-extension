@@ -5,4 +5,5 @@ document.getElementById("preferences").addEventListener("click", function() {
       window.open(chrome.runtime.getURL('options.html'));
     }
   });
+
   
