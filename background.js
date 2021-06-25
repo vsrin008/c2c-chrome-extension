@@ -1,4 +1,3 @@
-console.log('background.js is running');
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({
         'className': "dgc",

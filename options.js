@@ -2,8 +2,8 @@ function save_options() {
   var className = document.getElementById('className').value;
   var iconSize = document.getElementById('iconSize').value;
   chrome.storage.local.set({
-    prefClassName: className,
-    prefIconSize: iconSize
+    className: className,
+    iconSize: iconSize
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -19,11 +19,11 @@ function save_options() {
 function restore_options() {
   // Use default value prefClassName = 'dgc' and prefIconSize = 'small'.
   chrome.storage.local.get({
-    prefClassName: 'dgc',
-    prefIconSize: 'small'
+    className: 'dgc',
+    iconSize: 'small'
   }, function(items) {
-    document.getElementById('className').value = items.prefClassName;
-    document.getElementById('iconSize').value = items.prefIconSize;
+    document.getElementById('className').value = items.className;
+    document.getElementById('iconSize').value = items.iconSize;
   });
 }
 
@@ -31,22 +31,26 @@ document.addEventListener('DOMContentLoaded', restore_options);
 
 document.getElementById('save').addEventListener('click', () => {
     save_options();
-    chrome.runtime.sendMessage({ 
-        message: "change_className",
-        payload: document.getElementById('className').value
-    }, response => {
-        if (response.message === 'success') {
-            console.log('Updated className');
-        }
+    chrome.runtime.sendMessage({
+      message: "render_c2c_page"
+    
     });
-    chrome.runtime.sendMessage({ 
-      message: "change_iconSize",
-      payload: document.getElementById('iconSize').value
-  }, response => {
-      if (response.message === 'success') {
-          console.log('Updated iconSize');
-      }
-  });
+  //   chrome.runtime.sendMessage({ 
+  //       message: "change_className",
+  //       payload: document.getElementById('className').value
+  //   }, response => {
+  //       if (response.message === 'success') {
+  //           console.log('Updated className');
+  //       }
+  //   });
+  //   chrome.runtime.sendMessage({ 
+  //     message: "change_iconSize",
+  //     payload: document.getElementById('iconSize').value
+  // }, response => {
+  //     if (response.message === 'success') {
+  //         console.log('Updated iconSize');
+  //     }
+  // });
 });
 
 
