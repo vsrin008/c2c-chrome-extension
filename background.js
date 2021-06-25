@@ -19,10 +19,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { //Injects Foregr
     }
 });
 
-
-
-
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.message === 'get_className') {
         chrome.storage.local.get('className', data => {

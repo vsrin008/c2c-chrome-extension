@@ -26,11 +26,11 @@ function restore_options() {
     document.getElementById('iconSize').value = items.prefIconSize;
   });
 }
+
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click',
-    save_options);
 
 document.getElementById('save').addEventListener('click', () => {
+    save_options();
     chrome.runtime.sendMessage({ 
         message: "change_className",
         payload: document.getElementById('className').value
@@ -39,10 +39,7 @@ document.getElementById('save').addEventListener('click', () => {
             console.log('Updated className');
         }
     });
-});
-
-document.getElementById('save').addEventListener('click', () => {
-  chrome.runtime.sendMessage({ 
+    chrome.runtime.sendMessage({ 
       message: "change_iconSize",
       payload: document.getElementById('iconSize').value
   }, response => {
