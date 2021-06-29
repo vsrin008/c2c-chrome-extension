@@ -19,6 +19,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { //Injects Foregr
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.message === 'render_c2c_page') {
+        chrome.tabs.reload()
+
+    }
+
     if (request.message === 'get_className') {
         chrome.storage.local.get('className', data => {
             if (chrome.runtime.lastError) {
@@ -86,4 +91,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         return true;
     }
+
+
 });
