@@ -1,4 +1,4 @@
-document.getElementById("preferences").addEventListener("click", function() {
+document.querySelector("#preferences").addEventListener("click", function() {
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
     } else {

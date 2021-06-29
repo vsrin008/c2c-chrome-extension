@@ -5,8 +5,9 @@ chrome.storage.local.get(['className', 'iconSize'], (data) => {
     console.log(className, " is the className");
     console.log(iconSize, " is the iconSize");
     
-    var numbers = document.getElementsByClassName(className); // creates an array of all elements with desired className
-    var count = document.getElementsByClassName(className).length; // gets length of array
+    var numbers = document.querySelectorAll('.' + className); // creates an array of all elements with desired className
+    var count = numbers.length; // gets length of array
+    console.log("The count is: " + count);
 
     for (var i=0; i <=count; ++i) {
         if (iconSize === 'small') {

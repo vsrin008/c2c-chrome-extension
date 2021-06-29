@@ -1,12 +1,12 @@
 function save_options() {
-  var className = document.getElementById('className').value;
-  var iconSize = document.getElementById('iconSize').value;
+  var className = document.querySelector("#className").value;
+  var iconSize = document.querySelector('#iconSize').value;
   chrome.storage.local.set({
     className: className,
     iconSize: iconSize
   }, function() {
     // Update status to let user know options were saved.
-    var status = document.getElementById('status');
+    var status = document.querySelector('#status');
     status.textContent = 'Options saved.';
     setTimeout(function() {
       status.textContent = '';
@@ -22,14 +22,14 @@ function restore_options() {
     className: 'dgc',
     iconSize: 'small'
   }, function(items) {
-    document.getElementById('className').value = items.className;
-    document.getElementById('iconSize').value = items.iconSize;
+    document.querySelector('#className').value = items.className;
+    document.querySelector('#iconSize').value = items.iconSize;
   });
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
 
-document.getElementById('save').addEventListener('click', () => {
+document.querySelector('#save').addEventListener('click', () => {
     save_options();
     chrome.runtime.sendMessage({
       message: "render_c2c_page"
