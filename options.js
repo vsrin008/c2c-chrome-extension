@@ -19,7 +19,7 @@ function save_options() {
 function restore_options() {
   // Use default value prefClassName = 'dgc' and prefIconSize = 'small'.
   chrome.storage.local.get({
-    className: 'dgc',
+    className: '.dgc',
     iconSize: 'small'
   }, function(items) {
     document.querySelector('#className').value = items.className;
@@ -52,6 +52,8 @@ document.querySelector('#save').addEventListener('click', () => {
   //     }
   // });
 });
+
+
 
 
     

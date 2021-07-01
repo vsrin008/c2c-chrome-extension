@@ -10,8 +10,9 @@ chrome.storage.local.get(['className', 'iconSize'], (data) => {
     console.log("The count is: " + count);
 
     for (var i=0; i <=count; ++i) {
+        var numberToAlert = numbers[i].innerHTML;
         if (iconSize === 'small') {
-            numbers[i].innerHTML += '<img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width=20>';
+            numbers[i].innerHTML += '<img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width="20" onclick=alert("calling")>';
         }
         else if (iconSize === 'medium') {
             numbers[i].innerHTML += '<img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width=40>';
