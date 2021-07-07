@@ -1,11 +1,13 @@
 
 function getEffectiveNumber(node) {
-    return node.innerHTML;
-
-}
-function validate(phone) {
+    let nodeHTML = node.innerHTML;
+    nodeHTML = nodeHTML.replace(/^\s*/,"").replace(/\s*$/,"");
     const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-    console.log(regex.test(phone))
+    if (!regex.test(nodeHTML)) {
+        return;
+    }
+    return nodeHTML.replace(/\D/g,"");
+
   }
   
 
@@ -41,13 +43,8 @@ chrome.storage.local.get(['className', 'iconSize'], (data) => {
             iconWidth = "60";
         }
         
-        if (validate(numbers[i]) === "true") {
-            console.log("Number is valid");
-            numbers[i].innerHTML += `<img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width="${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >`;
-        }
-        else {
-            console.log("Not a valid number");
-        }
+
+        numbers[i].innerHTML += `<img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width="${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >`;
     }
 }
 );
