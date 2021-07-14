@@ -6,8 +6,16 @@ function getEffectiveNumber(node) {
     if (!regex.test(nodeHTML)) {
         return;
     }
-    return nodeHTML.replace(/\D/g,"");
+    let effNum =  nodeHTML.replace(/\D/g,"");
 
+    if (effNum.length == 10) {
+        effNum = '91' + effNum;
+    } 
+    else if (effNum.length != 4) {
+        effNum = '9' + effNum;
+    }
+
+    return effNum;
   }
   
 
@@ -44,7 +52,7 @@ chrome.storage.local.get(['className', 'iconSize'], (data) => {
         }
         
 
-        numbers[i].innerHTML += `<img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width="${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >`;
+        numbers[i].innerHTML += `<a href="callto://${effectiveNumber}"><img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width="${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' ></a>`;
     }
 }
 );
