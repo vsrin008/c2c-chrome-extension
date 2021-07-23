@@ -71,7 +71,6 @@ chrome.storage.local.get(['className', 'iconSize'], (data) => {
         
 
         numbers[i].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons md-${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >call</a>`;
-        //numbers[i].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons">&#xE87C;</span>`;
     }
 }
 );
