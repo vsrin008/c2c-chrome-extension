@@ -1,13 +1,31 @@
+document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">'
+
+
+function addStyle(styleString) {
+    const style = document.createElement('style');
+    style.textContent = styleString;
+    document.head.append(style);
+  }
+  
+  addStyle(`
+  .material-icons.md-18 { font-size: 18px; }
+  .material-icons.md-24 { font-size: 24px; }
+  .material-icons.md-36 { font-size: 36px; }
+  .material-icons.md-48 { font-size: 48px; }
+  
+  `);
+  
+  
+
 
 function getEffectiveNumber(node) {
     let nodeHTML = node.innerHTML;
     nodeHTML = nodeHTML.replace(/^\s*/,"").replace(/\s*$/,"");
     const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     if (!regex.test(nodeHTML)) {
-        return;
+        return; 
     }
     let effNum =  nodeHTML.replace(/\D/g,"");
-
     if (effNum.length == 10) {
         effNum = '91' + effNum;
     } 
@@ -44,15 +62,16 @@ chrome.storage.local.get(['className', 'iconSize'], (data) => {
             continue;
         }
 
-        let iconWidth = "20";
+        let iconWidth = "18";
         if (iconSize === 'medium') {
-            iconWidth = "40";
+            iconWidth = "24";
         } else if (iconSize === 'large') {
-            iconWidth = "60";
+            iconWidth = "48";
         }
         
 
-        numbers[i].innerHTML += `<a href="callto://${effectiveNumber}"><img src="https://louisville.edu/enrollmentmanagement/images/phone-icon/image" width="${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' ></a>`;
+        numbers[i].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons md-${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >call</a>`;
+        //numbers[i].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons">&#xE87C;</span>`;
     }
 }
 );
