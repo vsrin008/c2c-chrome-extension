@@ -21,7 +21,7 @@ function addStyle(styleString) {
 function getEffectiveNumber(node) {
     let nodeHTML = node.innerHTML;
     nodeHTML = nodeHTML.replace(/^\s*/,"").replace(/\s*$/,"");
-    const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]+[0-9]{4,6}$/im;
     if (!regex.test(nodeHTML)) {
         return; 
     }
@@ -45,8 +45,9 @@ chrome.storage.local.get(['className', 'iconSize'], (data) => {
     // renderClickElements(classname, iconsize);
 
     var numbers = document.querySelectorAll(className); // creates an array of all elements with desired className
-    var count = numbers.length; 
-    console.log("The count is: " + count);
+    var count = numbers.length;
+    console.log("document = %o", document); 
+    console.log("The count is: " + count + " Query string is: " + className);
 
     
     for (var i=0; i <count; ++i) {
