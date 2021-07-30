@@ -37,41 +37,45 @@ function getEffectiveNumber(node) {
   }
   
 
-chrome.storage.local.get(['className', 'iconSize'], (data) => {
-    let className = data.className;
+chrome.storage.local.get(['querySelArr', 'iconSize'], (data) => {
+    let querySelArr = data.querySelArr;
     let iconSize = data.iconSize;
-    console.log("className = %s, iconSize = %s", className, iconSize);
-    
-    // renderClickElements(classname, iconsize);
+    console.log("querySelArr = %o, iconSize = %s", querySelArr, iconSize);
 
-    var numbers = document.querySelectorAll(className); // creates an array of all elements with desired className
-    var count = numbers.length;
-    console.log("document = %o", document); 
-    console.log("The count is: " + count + " Query string is: " + className);
+    for (let i = 0; typeof querySelArr != "undefined" && i < querySelArr.length; i++) {
+        var querySel = querySelArr[i];
 
-    
-    for (var i=0; i <count; ++i) {
-        let numberToAlert = numbers[i].innerHTML;
+        console.log("i = %d, querySel = %s", i, querySel);
 
-        // make sure numberToAlert contains a valid phone number here
-        let effectiveNumber = getEffectiveNumber(numbers[i]);
-        console.log("effectiveNUmber = %o", effectiveNumber);
-
-
-        if (! effectiveNumber) {
-            // unable to get a valid number from teh element, do nothing
+        if (!querySel || querySel === "") {
+            // if queryselector entry in options is empty, do nothing
             continue;
         }
 
-        let iconWidth = "18";
-        if (iconSize === 'medium') {
-            iconWidth = "24";
-        } else if (iconSize === 'large') {
-            iconWidth = "48";
-        }
-        
+        var elems = document.querySelectorAll(querySel);
 
-        numbers[i].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons md-${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >call</a>`;
+        var count = elems.length;
+        console.log("The count for elements matching query %s is %d ", querySel, count);
+        
+        for (var j=0; j <count; ++j) {
+            // make sure numberToAlert contains a valid phone number here
+            let effectiveNumber = getEffectiveNumber(elems[j]);
+            console.log("effectiveNUmber for elem# %d = %s", j, effectiveNumber);
+
+            if (! effectiveNumber) {
+                // unable to get a valid number from teh element, do nothing
+                continue;
+            }
+
+            let iconWidth = "18";
+            if (iconSize === 'medium') {
+                iconWidth = "24";
+            } else if (iconSize === 'large') {
+                iconWidth = "48";
+            }
+            
+
+            elems[j].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons md-${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >call</a>`;
+        }
     }
-}
-);
+});

@@ -1,8 +1,14 @@
 function save_options() {
-  var className = document.querySelector("#className").value;
+  var querySelArr = [];
+  
+  var elemArr = document.querySelectorAll(".querySelClass").forEach(element => {
+    querySelArr.push(element.value);
+  });;
+
+  console.log("querySelArr %o",querySelArr);
   var iconSize = document.querySelector('#iconSize').value;
   chrome.storage.local.set({
-    className: className,
+    querySelArr: querySelArr,
     iconSize: iconSize
   }, function() {
     // Update status to let user know options were saved.
@@ -19,11 +25,19 @@ function save_options() {
 function restore_options() {
   // Use default value prefClassName = 'dgc' and prefIconSize = 'small'.
   chrome.storage.local.get({
-    className: '.dgc',
+    querySelArr: [".abc"],
     iconSize: 'small'
   }, function(items) {
-    document.querySelector('#className').value = items.className;
-    document.querySelector('#iconSize').value = items.iconSize;
+    // document.querySelector('#className').value = items.className;
+    var querySelArr = items.querySelArr;
+    for (let i = 0; i < querySelArr.length; i++) {
+       var querySel = querySelArr[i];
+      if (querySel) {
+        let elementID = "className"+(i+1);
+        document.getElementById(elementID).value = querySel;
+      }
+    }
+    document.getElementById('iconSize').value = items.iconSize;
   });
 }
 
