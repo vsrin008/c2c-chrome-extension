@@ -5,7 +5,23 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 
+chrome.runtime.onStartup.addListener(() => {
+    console.log("Test alert");
+    fetch('http://zipline.dgc.com/perl/ext_startup.pl')
+    .then(response => response.json())
+    .then(data => console.log(data));
+    
+});
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { //Injects Foreground script when new tab is opened
+    // var opt = {
+    //     iconUrl: "icon.png",
+    //     type: 'basic',
+    //     title: 'Primary Title',
+    //     message: 'Primary message to display',
+    //     priority: 1
+    //   };
+    //   chrome.notifications.create('notify1', opt, function() { console.log('created!'); });
     if (changeInfo.status === 'complete') {
         chrome.scripting.executeScript({
             target: { tabId: tabId },
@@ -22,7 +38,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.message === 'render_c2c_page') {
         chrome.tabs.reload()
 
-    }
+    }``
 
     if (request.message === 'get_className') {
         chrome.storage.local.get('className', data => {
