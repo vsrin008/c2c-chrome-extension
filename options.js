@@ -1,9 +1,8 @@
-function save_options() {
-  var querySelArr = [];
-
-  var elemArr = document.querySelectorAll(".querySelClass.userSelClass").forEach(element => {
+function save_options() { //saves an array with the user-inputted querySelectors
+    var querySelArr = [];
+    var elemArr = document.querySelectorAll(".querySelClass.userSelClass").forEach(element => {
     querySelArr.push(element.value);
-  });;
+});;
 
   console.log("querySelArr %o", querySelArr);
   var iconSize = document.querySelector('#iconSize').value;
@@ -50,28 +49,8 @@ function restore_options() {
 
 document.addEventListener('DOMContentLoaded', restore_options);
 
-document.querySelector('#save').addEventListener('click', () => {
+document.querySelector('#save').addEventListener('click', () => { //calls function to save options when save button is clicked
     save_options();
-    // chrome.runtime.sendMessage({
-    //   message: "render_c2c_page"
-    
-    // });
-  //   chrome.runtime.sendMessage({ 
-  //       message: "change_className",
-  //       payload: document.getElementById('className').value
-  //   }, response => {
-  //       if (response.message === 'success') {
-  //           console.log('Updated className');
-  //       }
-  //   });
-  //   chrome.runtime.sendMessage({ 
-  //     message: "change_iconSize",
-  //     payload: document.getElementById('iconSize').value
-  // }, response => {
-  //     if (response.message === 'success') {
-  //         console.log('Updated iconSize');
-  //     }
-  // });
 });
 
 
