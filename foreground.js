@@ -12,7 +12,7 @@ function addStyle(styleString) {
   .material-icons.md-24 { font-size: 24px; }
   .material-icons.md-36 { font-size: 36px; }
   .material-icons.md-48 { font-size: 48px; }
-  
+
   `);
   
   
@@ -37,10 +37,12 @@ function getEffectiveNumber(node) {
   }
   
 
-chrome.storage.local.get(['querySelArr', 'iconSize'], (data) => {
+chrome.storage.local.get(['querySelArr', 'querySelServerArr','iconSize'], (data) => {
     let querySelArr = data.querySelArr;
+    let querySelServerArr = data.querySelServerArr;
     let iconSize = data.iconSize;
-    console.log("querySelArr = %o, iconSize = %s", querySelArr, iconSize);
+    console.log("querySelArr = %o, querySelServerArr = %o, iconSize = %s", querySelArr, querySelServerArr, iconSize);
+    querySelArr = querySelArr.concat(querySelServerArr);
 
     for (let i = 0; typeof querySelArr != "undefined" && i < querySelArr.length; i++) {
         var querySel = querySelArr[i];

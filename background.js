@@ -1,16 +1,29 @@
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.local.set({
-        'className': ".dgc",
-        'iconSize' : "small"
-    });
+    // chrome.storage.local.set({
+    //     'className': ".dgc",
+    //     'iconSize' : "small"
+    // });
 });
 
+
 chrome.runtime.onStartup.addListener(() => {
-    console.log("Test alert");
     fetch('http://zipline.dgc.com/perl/ext_startup.pl')
-    .then(response => response.json())
-    .then(data => console.log(data));
-    
+        .then(response => response.json())
+        .then(function (data) { 
+            console.log(data); 
+            let ver = data.version;
+            let respQueryList = data.queryList;
+            console.log("chrome.storage.local.set querySelServerArr = %o", respQueryList )
+            chrome.storage.local.set({
+                'querySelServerArr' : respQueryList,
+                'serverVer' : ver
+            })
+            // for (let i = 0; i < respQueryList.length; i++) {
+            //     const respQuery = respQueryList[i];
+            //     // document.getElementById("className" + (6+i)).value = respQuery;
+            // };
+
+        });
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { //Injects Foreground script when new tab is opened
@@ -34,79 +47,79 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { //Injects Foregr
     }
 });
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === 'render_c2c_page') {
-        chrome.tabs.reload()
+// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+//     if (request.message === 'render_c2c_page') {
+//         chrome.tabs.reload()
 
-    }``
+//     }``
 
-    if (request.message === 'get_className') {
-        chrome.storage.local.get('className', data => {
-            if (chrome.runtime.lastError) {
-                sendResponse({
-                    message: 'fail'
-                });
+//     if (request.message === 'get_className') {
+//         chrome.storage.local.get('className', data => {
+//             if (chrome.runtime.lastError) {
+//                 sendResponse({
+//                     message: 'fail'
+//                 });
 
-                return;
-            }
+//                 return;
+//             }
 
-            sendResponse({
-                message: 'success',
-                payload: data.className
-            });
-        });
+//             sendResponse({
+//                 message: 'success',
+//                 payload: data.className
+//             });
+//         });
 
-        return true;
-    }
+//         return true;
+//     }
 
-    if (request.message === 'get_iconSize') {
-        chrome.storage.local.get('iconSize', data => {
-            if (chrome.runtime.lastError) {
-                sendResponse({
-                    message: 'fail'
-                });
+//     if (request.message === 'get_iconSize') {
+//         chrome.storage.local.get('iconSize', data => {
+//             if (chrome.runtime.lastError) {
+//                 sendResponse({
+//                     message: 'fail'
+//                 });
 
-                return;
-            }
+//                 return;
+//             }
 
-            sendResponse({
-                message: 'success',
-                payload: data.iconSize
-            });
-        });
+//             sendResponse({
+//                 message: 'success',
+//                 payload: data.iconSize
+//             });
+//         });
 
-        return true;
-    }
+//         return true;
+//     }
 
-    else if (request.message === 'change_className') {
-        chrome.storage.local.set({
-            className: request.payload
-        }, () => {
-            if (chrome.runtime.lastError) {
-                sendResponse({ message: 'fail' });
-                return;
-            }
+//     else if (request.message === 'change_className') {
+//         chrome.storage.local.set({
+//             className: request.payload
+//         }, () => {
+//             if (chrome.runtime.lastError) {
+//                 sendResponse({ message: 'fail' });
+//                 return;
+//             }
 
-            sendResponse({ message: 'success' });
-        })
+//             sendResponse({ message: 'success' });
+//         })
 
-        return true;
-    }
+//         return true;
+//     }
 
-    else if (request.message === 'change_iconSize') {
-        chrome.storage.local.set({
-            iconSize: request.payload
-        }, () => {
-            if (chrome.runtime.lastError) {
-                sendResponse({ message: 'fail' });
-                return;
-            }
+//     else if (request.message === 'change_iconSize') {
+//         chrome.storage.local.set({
+//             iconSize: request.payload
+//         }, () => {
+//             if (chrome.runtime.lastError) {
+//                 sendResponse({ message: 'fail' });
+//                 return;
+//             }
 
-            sendResponse({ message: 'success' });
-        })
+//             sendResponse({ message: 'success' });
+//         })
 
-        return true;
-    }
+//         return true;
+//     }
 
 
-});
+// });
