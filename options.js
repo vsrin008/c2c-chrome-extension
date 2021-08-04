@@ -31,7 +31,7 @@ function restore_options() {
         for (let i = 0; i < querySelArr.length; i++) {
             var querySel = querySelArr[i];
             if (querySel) {
-                let elementID = "className"+(i+1);
+                let elementID = "querySelector"+(i+1);
                 document.getElementById(elementID).value = querySel;
             }
         }
@@ -39,7 +39,7 @@ function restore_options() {
         for (let i = 0; i < querySelServerArr.length; i++) {
             var querySelServer = querySelServerArr[i];
             if (querySelServer) {
-                let elementID = "className"+(i+6);
+                let elementID = "querySelector"+(i+6);
                 document.getElementById(elementID).value = querySelServer;
             }
         }

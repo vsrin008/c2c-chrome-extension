@@ -7,13 +7,12 @@ function addStyle(styleString) {
     document.head.append(style);
   }
   
-  addStyle(`
-  .material-icons.md-18 { font-size: 18px; }
-  .material-icons.md-24 { font-size: 24px; }
-  .material-icons.md-36 { font-size: 36px; }
-  .material-icons.md-48 { font-size: 48px; }
-
-  `);
+addStyle(`
+    .material-icons.md-18 { font-size: 18px; }
+    .material-icons.md-24 { font-size: 24px; }
+    .material-icons.md-36 { font-size: 36px; }
+    .material-icons.md-48 { font-size: 48px; }
+`);
   
   
 
@@ -34,7 +33,7 @@ function getEffectiveNumber(node) {
     }
 
     return effNum;
-  }
+}
   
 
 chrome.storage.local.get(['querySelArr', 'querySelServerArr','iconSize'], (data) => {
@@ -50,7 +49,7 @@ chrome.storage.local.get(['querySelArr', 'querySelServerArr','iconSize'], (data)
         console.log("i = %d, querySel = %s", i, querySel);
 
         if (!querySel || querySel === "") {
-            // if queryselector entry in options is empty, do nothing
+            // if queryselector is empty, do nothing
             continue;
         }
 
