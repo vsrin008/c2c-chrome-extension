@@ -12,6 +12,7 @@ function save_options() { //saves an array with the user-inputted querySelectors
   }, function () {
     // Update status to let user know options were saved.
     var status = document.querySelector('#status');
+    status.style.color = 'white';
     status.textContent = 'Options saved.';
     setTimeout(function () {
       status.textContent = '';

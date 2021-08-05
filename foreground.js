@@ -1,6 +1,5 @@
 document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">'
 
-
 function addStyle(styleString) {
     const style = document.createElement('style');
     style.textContent = styleString;
@@ -13,9 +12,6 @@ addStyle(`
     .material-icons.md-36 { font-size: 36px; }
     .material-icons.md-48 { font-size: 48px; }
 `);
-  
-  
-
 
 function getEffectiveNumber(node) {
     let nodeHTML = node.innerHTML;
@@ -34,7 +30,6 @@ function getEffectiveNumber(node) {
 
     return effNum;
 }
-  
 
 chrome.storage.local.get(['querySelArr', 'querySelServerArr','iconSize'], (data) => {
     let querySelArr = data.querySelArr;

@@ -1,6 +1,6 @@
 {
   "name": "DGC Click2Call",
-  "description": "Building a Chrome Extension MV3",
+  "description": "Click2Call extension for DeSilva Gates Construction",
   "version": "0.1.0",
   "manifest_version": 3,
   
@@ -17,10 +17,12 @@
       "activeTab",
       "tabs",
       "storage",
-      "scripting",
-      "notifications"
+      "scripting"
   ],
   "host_permissions": [
-      "*://*/*"
+      "http://zipline.dgc.com/*",
+      "http://zipline/*",
+      "http://intra.dgc.com/*",
+      "http://intra/*"
   ]
 } 
