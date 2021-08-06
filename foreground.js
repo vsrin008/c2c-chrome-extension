@@ -35,6 +35,12 @@ chrome.storage.local.get(['querySelArr', 'querySelServerArr','iconSize'], (data)
     let querySelArr = data.querySelArr;
     let querySelServerArr = data.querySelServerArr;
     let iconSize = data.iconSize;
+
+    if (!querySelArr)
+        querySelArr = [];
+    if (!querySelServerArr)
+        querySelServerArr = [];
+
     console.log("querySelArr = %o, querySelServerArr = %o, iconSize = %s", querySelArr, querySelServerArr, iconSize);
     querySelArr = querySelArr.concat(querySelServerArr);
 
@@ -71,7 +77,7 @@ chrome.storage.local.get(['querySelArr', 'querySelServerArr','iconSize'], (data)
             }
             
 
-            elems[j].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons md-${iconWidth}" id="c2cicon" onclick='alert("${effectiveNumber}");' >call</a>`;
+            elems[j].innerHTML += `<a href="callto://${effectiveNumber}"><span class="material-icons md-${iconWidth}" id="c2cicon"");' >call</a>`;
         }
     }
 });

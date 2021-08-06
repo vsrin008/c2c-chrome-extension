@@ -3,18 +3,19 @@
 <head><title>DGC Click2Call Preferences</title>
   <link rel="stylesheet" href="options.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 
 </head>
 <body>
-<h1>DeSilva Gates Click2Call Preferences</h1>
+
+<h1><img style="vertical-align:middle"src="DG.png" width="50" id="logo">DeSilva Gates Click2Call</h1>
 <div class="container">
-  <h2>Settings</h2>
   <p>Configurable querySelectors:</p>
-  <input type="text" id="querySelector1" name="querySelector1" class="querySelClass userSelClass" placeholder = "querySelector1"><br><br>
-  <input type="text" id="querySelector2" name="querySelector2" class="querySelClass userSelClass" placeholder = "querySelector2"><br><br>
-  <input type="text" id="querySelector3" name="querySelector3" class="querySelClass userSelClass" placeholder = "querySelector3"><br><br>
-  <input type="text" id="querySelector4" name="querySelector4" class="querySelClass userSelClass" placeholder = "querySelector4"><br><br>
-  <input type="text" id="querySelector5" name="querySelector5" class="querySelClass userSelClass" placeholder = "querySelector5"><br><br>
+  <input type="text" id="querySelector1" name="querySelector1" class="querySelClass userSelClass"><br><br>
+  <input type="text" id="querySelector2" name="querySelector2" class="querySelClass userSelClass"><br><br>
+  <input type="text" id="querySelector3" name="querySelector3" class="querySelClass userSelClass"><br><br>
+  <input type="text" id="querySelector4" name="querySelector4" class="querySelClass userSelClass"><br><br>
+  <input type="text" id="querySelector5" name="querySelector5" class="querySelClass userSelClass"><br><br>
   <p>Predefined querySelectors:</p>
   <input type="text" disabled="disabled" id="querySelector6" name="querySelector6" class="querySelClass"><br><br>
   <input type="text" disabled="disabled" id="querySelector7" name="querySelector7" class="querySelClass"><br><br>
@@ -28,9 +29,11 @@
     <option value="medium">medium</option>
     <option value="large">large</option>
   </select>
+  <br><br>
 
   <div id="status"></div>
   <button id="save" class ="button">Save</button>
+  <br>
 </div>
 
 <script src="options.js"></script>
