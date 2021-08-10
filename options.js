@@ -54,6 +54,23 @@ document.querySelector('#save').addEventListener('click', () => { //calls functi
     save_options();
 });
 
+document.querySelector('#clear').addEventListener('click', () => { //clears cache when button clicked
+    var millisecondsPerWeek = 1000 * 60 * 60 * 24 * 7;
+    var oneWeekAgo = (new Date()).getTime() - millisecondsPerWeek;
+    
+    chrome.browsingData.remove({
+      "since": oneWeekAgo,
+      "origins": ["http://zzipline.dgc.com", "http://zzipline.dgc.com:8080", "http://zzipline"]
+    }, {
+      "appcache": true,
+      "cache": true,
+      "cacheStorage": true,
+      "cookies": true
+    }, () => {
+      alert("Cache cleared.");
+    });
+});
+
 
 
 
