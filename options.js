@@ -20,6 +20,23 @@ function save_options() { //saves an array with the user-inputted querySelectors
   });
 }
 
+function clearCacheFunc() {
+  var millisecondsPerWeek = 1000 * 60 * 60 * 24 * 7;
+  var oneWeekAgo = (new Date()).getTime() - millisecondsPerWeek;
+  
+  chrome.browsingData.remove({
+    "since": oneWeekAgo,
+    "origins": ["http://zipline.dgc.com", "http://zipline.dgc.com:8080", "http://zipline"]
+  }, {
+    "appcache": true,
+    "cache": true,
+    "cacheStorage": true,
+    "cookies": true
+  }, () => {
+    alert("Cache cleared.");
+  });
+}
+
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
@@ -55,20 +72,7 @@ document.querySelector('#save').addEventListener('click', () => { //calls functi
 });
 
 document.querySelector('#clear').addEventListener('click', () => { //clears cache when button clicked
-    var millisecondsPerWeek = 1000 * 60 * 60 * 24 * 7;
-    var oneWeekAgo = (new Date()).getTime() - millisecondsPerWeek;
-    
-    chrome.browsingData.remove({
-      "since": oneWeekAgo,
-      "origins": ["http://zzipline.dgc.com", "http://zzipline.dgc.com:8080", "http://zzipline"]
-    }, {
-      "appcache": true,
-      "cache": true,
-      "cacheStorage": true,
-      "cookies": true
-    }, () => {
-      alert("Cache cleared.");
-    });
+  clearCacheFunc()
 });
 
 

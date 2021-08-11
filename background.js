@@ -2,19 +2,24 @@ function fetchFromServer() { //gets querySelectors from server and sets them in 
     fetch('http://zipline.dgc.com/perl/ext_startup.pl')
         .then(response => response.json())
         .then(function (data) { 
-            console.log(data); 
+            console.log(data);
+            let clearCache = data.clearCache; 
             let ver = data.version;
             let respQueryList = data.queryList;
             console.log("chrome.storage.local.set querySelServerArr = %o", respQueryList )
             chrome.storage.local.set({
                 'querySelServerArr' : respQueryList,
-                'serverVer' : ver
+                'serverVer' : ver,
+                'clearCacheBool' : clearCache
             })
         });
 }
 
 chrome.runtime.onInstalled.addListener(() => {
     fetchFromServer();
+    if (clearCache == 1) {
+        clearCacheFunc();
+    }
 });
 
 
